@@ -25,24 +25,24 @@ def writeContactList(path, data):
     
 
 # вывод данных в терминал
-def printData(flags):
-    for i in range(5):
+def printData(flags, usrLen):
+    for i in range(usrLen):
         if (flags[0]):
             print(" ", end='')
             print(dataProcessing.dictFirstName[i], end='')
-        else: return
+
         if (flags[1]):
             print(" ", end='')
             print(dataProcessing.dictLastName[i], end='')
-        else: return
+
         if (flags[2]):
             print(" ", end='')
             print(dataProcessing.dictPhoneNumber[i], end='')
-        else: return
+
         if (flags[3]):
             print(" ", end='')
             print(dataProcessing.dictComment[i], end='')
-        else: return
+
         print("\n", end='')
     print("Нажмите любую клавишу для продолжения...", end='')
     input()

@@ -41,6 +41,71 @@ def prepareExportStr(fileType):
     print("Экспорт завершён успешно!")
     print("Нажмите любую клавишу для продолжения...", end='')
     input()
-
     return data
 
+# Поиск контакта по фамилии/номеру телефона
+def findContact(key):
+    for keyDict, value in dictFirstName.items(): # возвращает кортеж (ключ, значение) из словаря
+        if value == key:
+            return keyDict
+    
+    for keyDict, value in dictLastName.items(): # возвращает кортеж (ключ, значение) из словаря
+        if value == key:
+            return keyDict
+
+    for keyDict, value in dictPhoneNumber.items(): # возвращает кортеж (ключ, значение) из словаря
+        if value == key:
+            return keyDict
+    
+    for keyDict, value in dictComment.items(): # возвращает кортеж (ключ, значение) из словаря
+        if value == key:
+            return keyDict
+
+# печать одного контакта
+def printOneContact(key):
+    print(chr(27) + "[2J")
+    print("Контакт найден: ")
+    print(dictFirstName.get(key), end = ' ')
+    print(dictLastName.get(key), end = ' ')
+    print(dictPhoneNumber.get(key), end = ' ')
+    print(dictComment.get(key))
+    print("Нажмите любую клавишу для продолжения...", end='')
+    input()
+
+# обновляем все словари после удаления контакта
+def refreshContanctList(rmKey):
+    dictFirstName.setdefault(rmKey, dictFirstName[len(dictFirstName)])
+    dictFirstName.pop(len(dictFirstName)-1)
+    
+    dictLastName.setdefault(rmKey, dictLastName[len(dictLastName)])
+    dictLastName.pop(len(dictLastName)-1)
+
+    dictPhoneNumber.setdefault(rmKey, dictPhoneNumber[len(dictPhoneNumber)])
+    dictPhoneNumber.pop(len(dictPhoneNumber)-1)
+
+    dictComment.setdefault(rmKey, dictComment[len(dictComment)])
+    dictComment.pop(len(dictComment)-1)
+
+# функция для удаления контакта
+def removeContact(key):
+    rmKey = findContact(key)
+    dictFirstName.pop(rmKey)
+    dictLastName.pop(rmKey)
+    dictPhoneNumber.pop(rmKey)
+    dictComment.pop(rmKey)
+    refreshContanctList(rmKey)
+    print("Контакт удалён")
+    print("Нажмите любую клавишу для продолжения...", end='')
+    input()
+
+# функция добавления контакта
+def addContact(firstName, lastName, phoneNumber, comment):
+    key = len(dictFirstName)
+    dictFirstName.setdefault(key, firstName)
+    dictLastName.setdefault(key, lastName)
+    dictPhoneNumber.setdefault(key, phoneNumber)
+    dictComment.setdefault(key, comment)
+    print("Контакт добавлен")
+    print("Нажмите любую клавишу для продолжения...", end='')
+    input()
+    

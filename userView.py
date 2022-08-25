@@ -47,6 +47,7 @@ def cmdProcessingPrint(cmd, impFlag):
         if (mode == "all"): # распечататать всё
             print(chr(27) + "[2J")
             config = "++++"
+            return config
 
         if (mode == "filter"): # выборочная печать
             print(chr(27) + "[2J")
@@ -54,14 +55,13 @@ def cmdProcessingPrint(cmd, impFlag):
             print("Комманда для печати фамилии и номера телефона: filter>+-+-")
             print("cmd>filter>", end='')
             config = input()
-            print(chr(27) + "[2J")
+            return config
     else: # обработчик ошибки при отсутствии импорта
         print(chr(27) + "[2J")
         print("Невозможно выполнить команду. В телефонном справочнике нет ни одной записи.")
         print("Выполните импорт телефонного справочника (cmd => imp) или добавьте контакт вручную (cmd => add).")
         print("Нажмите любую клавишу для продолжения...", end='')
         input()
-    return config
 
 # обработка импорта контактов 
 def cmdProcessingImp(cmd):
